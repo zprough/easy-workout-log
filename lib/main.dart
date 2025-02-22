@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'profile.dart';
+import 'analytics.dart';
+import 'about.dart';
+import 'settings.dart';
+import 'exercise.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Easy Workout Log',
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
@@ -29,7 +34,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -50,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(widget.title),
           bottom: TabBar(
-            tabs: <Widget> [
+            tabs: <Widget>[
               Tab(icon: const Icon(Icons.home), text: "Home"),
               Tab(icon: const Icon(Icons.fitness_center), text: "Exercise"),
               Tab(icon: const Icon(Icons.list), text: "Routine"),
@@ -59,9 +65,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
           ),
         ),
 
-// Drawer Tiles: ['Summary', 'Exercise', 'Routine', 'Tools', 'Profile', 'Settings', 'Analytics', 'About']
-
-
+        // Drawer Tiles: ['Summary', 'Exercise', 'Routine', 'Tools', 'Profile', 'Settings', 'Analytics', 'About']
         drawer: Drawer(
           child: Builder(
             builder: (BuildContext context) {
@@ -74,10 +78,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     ),
                     child: Text(
                       'Navigation',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 24),
                     ),
                   ),
                   ListTile(
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     title: Text('Home'),
                     onTap: () {
                       Navigator.pop(context);
-                      DefaultTabController.of(context)?.animateTo(0);
+                      DefaultTabController.of(context).animateTo(0);
                     },
                   ),
                   ListTile(
@@ -93,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     title: Text('Exercise'),
                     onTap: () {
                       Navigator.pop(context);
-                      DefaultTabController.of(context)?.animateTo(1);
+                      DefaultTabController.of(context).animateTo(1);
                     },
                   ),
                   ListTile(
@@ -101,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     title: Text('Routine'),
                     onTap: () {
                       Navigator.pop(context);
-                      DefaultTabController.of(context)?.animateTo(2);
+                      DefaultTabController.of(context).animateTo(2);
                     },
                   ),
                   ListTile(
@@ -109,7 +110,59 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     title: Text('Tools'),
                     onTap: () {
                       Navigator.pop(context);
-                      DefaultTabController.of(context)?.animateTo(3);
+                      DefaultTabController.of(context).animateTo(3);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text('Profile'),
+                    onTap: () {
+                      // Handle onTap
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfilePage(),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text('Settings'),
+                    onTap: () {
+                      // Handle onTap
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.analytics),
+                    title: Text('Analytics'),
+                    onTap: () {
+                      // Handle onTap
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AnalyticsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.info),
+                    title: Text('About'),
+                    onTap: () {
+                      // Handle onTap
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AboutPage(),
+                        ),
+                      );
                     },
                   ),
                 ],
@@ -121,16 +174,10 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         body: TabBarView(
           children: const [
             Center(child: Text('Summary Page')),
-            Center(child: Text('Exercise Page')),
+            Center(child: ExercisePage()),
             Center(child: Text('Routine Page')),
             Center(child: Text('Profile Page')),
           ],
-        ),
-
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
         ),
       ),
     );
